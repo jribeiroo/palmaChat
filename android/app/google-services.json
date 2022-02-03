@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "240314142283",
+    "project_id": "palmachat-1399c",
+    "storage_bucket": "palmachat-1399c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240314142283:android:e0abb0ee6693dd515207ce",
+        "android_client_info": {
+          "package_name": "com.example.palma_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "240314142283-gsdrrgiv7m9esckbf12b1nahgmgs53r0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.palma_chat",
+            "certificate_hash": "f8eb8081d9528b659add7cd19e7e76413e0b915d"
+          }
+        },
+        {
+          "client_id": "240314142283-nrrquiri3l188skh0q7ml1hqnvvfj9l9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWPlmx87oceyotaykkouX6RsxM01aKFSk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "240314142283-nrrquiri3l188skh0q7ml1hqnvvfj9l9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
