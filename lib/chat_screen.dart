@@ -1,8 +1,11 @@
 
+
+
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -17,19 +20,24 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
 
-   _sendMessage({String? text, File? imgFile}) async {
-    if (imgFile != null) {
-      UploadTask task = FirebaseStorage.instance
-          .ref()
-          .child(DateTime.now().microsecondsSinceEpoch.toString())
-          .putFile(imgFile);
+  _sendMessage({String? text, PickedFile? imgFile}) async {
+    
+     if(imgFile != null){
+       UploadTask task = FirebaseStorage.instance.ref().child(
+         DateTime.now().millisecondsSinceEpoch.toString()
+       ).putFile(File(imgFile.path));
 
-      TaskSnapshot taskSnapshot = await task;
-      String url = await taskSnapshot.ref.getDownloadURL();
-      print(url);
-    }
+        TaskSnapshot taskSnapshot = await task;
+        String url = await taskSnapshot.ref.getDownloadURL();
+        if (kDebugMode) {
+          print(url);
+        }
 
-    FirebaseFirestore.instance.collection('messages').add({'text': text});
+     }
+
+    FirebaseFirestore.instance.collection('messages').add({
+      'text' : text
+    });
   }
 
   @override
