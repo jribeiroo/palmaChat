@@ -21,6 +21,9 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
 
   _sendMessage({String? text, PickedFile? imgFile}) async {
+
+    //mapeando dados para para o banco
+    Map<String, dynamic> data = {};
     
      if(imgFile != null){
        UploadTask task = FirebaseStorage.instance.ref().child(
@@ -29,15 +32,14 @@ class _ChatScreenState extends State<ChatScreen> {
 
         TaskSnapshot taskSnapshot = await task;
         String url = await taskSnapshot.ref.getDownloadURL();
-        if (kDebugMode) {
-          print(url);
-        }
-
+        data['imgUrl'] = url;
      }
 
-    FirebaseFirestore.instance.collection('messages').add({
-      'text' : text
-    });
+     if(text != null) {
+       data['text'] = text;
+     }
+       
+    FirebaseFirestore.instance.collection('messages').add(data);
   }
 
   @override
@@ -47,7 +49,43 @@ class _ChatScreenState extends State<ChatScreen> {
         title: const Text('Ola'),
         elevation: 0,
       ),
-      body: TextComposer(_sendMessage),
+      body: Column(
+        children: [
+          Expanded(
+            child: StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance.collection('messages').snapshots(),
+              builder: (context, snapshot){
+                switch(snapshot.connectionState){
+                  case ConnectionState.none:
+                  case ConnectionState.waiting:
+                  // ignore: prefer_const_constructors
+                  return Center(
+                    // ignore: prefer_const_constructors
+                    child: CircularProgressIndicator(),
+                    );
+                    default:
+                    List<DocumentSnapshot> documents = snapshot.data!.docs;
+                    return ListView.builder(
+                      itemCount: documents.length,
+                      reverse: true,
+                      itemBuilder: (context, index){
+                        return ListTile(
+                          title: Text(documents[index].data()['texto'] ?? ''),
+                        );
+                      }
+                    );
+                }
+              },
+
+            ),
+            
+            
+            
+            
+            ),
+          TextComposer(_sendMessage),
+        ],
+      ),
     );
   }
 }
