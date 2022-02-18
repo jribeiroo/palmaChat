@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "240314142283-gsdrrgiv7m9esckbf12b1nahgmgs53r0.apps.googleusercontent.com",
+          "client_id": "240314142283-r11s9upset60nj09j8cg4qhc2p1qa63c.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.palma_chat",
-            "certificate_hash": "f8eb8081d9528b659add7cd19e7e76413e0b915d"
+            "certificate_hash": "5e5446984320bc9e557719cf88b949bc0e9e8df0"
           }
         },
         {
