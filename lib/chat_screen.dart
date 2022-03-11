@@ -5,10 +5,10 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:palma_chat/chat_message.dart';
 
 import 'package:palma_chat/text_composer.dart';
 
@@ -22,8 +22,8 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GoogleSignIn googleSignIn = GoogleSignIn();
-  
-   User? _currentUser;
+
+  User? _currentUser;
 
   @override
   void initState() {
@@ -120,9 +120,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         itemCount: documents.length,
                         reverse: true,
                         itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text(documents[index]['text']),
-                          );
+                          return ChatMessage(documents[index].data);
                         });
                 }
               },
@@ -132,10 +130,5 @@ class _ChatScreenState extends State<ChatScreen> {
         ],
       ),
     );
-  }
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<User>('_currentUser', _currentUser));
   }
 }
