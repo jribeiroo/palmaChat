@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 class ChatMessage extends StatelessWidget {
-  ChatMessage(this.data);
+  ChatMessage(this.data, {Key? key}) : super(key: key);
 
   final Map<String, dynamic> data;
 
