@@ -14,7 +14,7 @@ class ChatMessage extends StatelessWidget {
       child: Row(
         children: [
           CircleAvatar(
-            backgroundImage: NetworkImage(data['senderPhotoUrl']),
+            backgroundImage: NetworkImage(data['senderPhotoUrl']?? ''),
           ),
           Expanded(
             child: Column(
@@ -26,7 +26,7 @@ class ChatMessage extends StatelessWidget {
                         style: TextStyle(fontSize: 16),
                       ),
                 Text(
-                  data['senderName'],
+                  data['senderName'] ?? '',
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
