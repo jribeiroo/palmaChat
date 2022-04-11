@@ -31,7 +31,7 @@ class _ChatScreenState extends State<ChatScreen> {
     super.initState();
     FirebaseAuth.instance.authStateChanges().listen((user) {
       setState(() {
-        _currentUser = user!;
+        _currentUser = user;
       });
     });
   }
@@ -79,7 +79,7 @@ class _ChatScreenState extends State<ChatScreen> {
     if (imgFile != null) {
       UploadTask task = FirebaseStorage.instance
           .ref()
-          .child(DateTime.now().millisecondsSinceEpoch.toString())
+          .child(user!.uid + DateTime.now().millisecondsSinceEpoch.toString())
           .putFile(File(imgFile.path));
 
       setState(() {
@@ -154,8 +154,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         itemBuilder: (context, index) {
                           return ChatMessage(
                               documents[index].data() as Map<String, dynamic>,
-                              documents[index]['uid'] == _currentUser?.uid 
-                              );
+                              documents[index]['uid'] == _currentUser?.uid);
                         });
                 }
               },
